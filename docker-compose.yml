@@ -1,13 +1,10 @@
-version: '3.8'
-
 services:
   cine-agent:
     build: .
     container_name: cine_agent
-    ports:
-      - "8501:8501" # Porta padrão do Streamlit
+    network_mode: host
     volumes:
-      - .:/app # Mapeia a pasta atual para o container
+      - .:/app
     environment:
-      - GEMINI_API_KEY=${GEMINI_API_KEY} # Puxa a GEMINI API KEY do .env
+      - OLLAMA_HOST=http://localhost:11434
     command: streamlit run src/app.py --server.address=0.0.0.0
