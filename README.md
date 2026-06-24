@@ -1,5 +1,7 @@
 ## Cine Agent: Sistema de Recomendação de Filmes e Séries
 
+### Trabalho da disciplina de Programação Orientada à Objetos
+
 **Integrantes:**
 * Felipe Gonçalves Vidal
 * Rafael José de Souza Marques
