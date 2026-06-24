@@ -8,7 +8,7 @@
 
 ---
 
-## Fundamentação Teórica & Decisões de Projeto
+## Fundamentação teórica e Decisões de projeto
 
 Este projeto foi estruturado seguindo rigorosamente os seguintes pilares acadêmicos e técnicos:
 
@@ -19,11 +19,11 @@ Este projeto foi estruturado seguindo rigorosamente os seguintes pilares acadêm
 
 ---
 
-## Sobre o Sistema (Recomendação de Filmes e Séries)
+## Sobre o sistema
 
 Um sistema de recomendação via interface web conversacional, desenvolvido em Python com Streamlit. O projeto permite que o usuário descreva seus gostos em linguagem natural e receba sugestões personalizadas e cruzadas de filmes e séries baseadas em seus gêneros preferidos.
 
-### Funcionalidades (Módulos Principais)
+### Funcionalidades
 
 **1. Motor de Recomendação (`Recomendador`)**
 * **Carregamento do Dataset:** Leitura automática do arquivo `conteudo.csv` contendo dezenas de títulos com seus respectivos gêneros e anos de lançamento.
@@ -50,14 +50,14 @@ Um sistema de recomendação via interface web conversacional, desenvolvido em P
 
 ---
 
-## Conceitos de POO Aplicados
+## Conceitos de POO aplicados
 
 | Conceito | Aplicação no Projeto |
 |---|---|
 | **Classe e Objeto** | `Recomendador`, `Agente` e `Exportador` são classes instanciadas em `app.py` |
 | **Encapsulamento** | Atributos como `self.df`, `self.modelo` e `self.chat` são internos às classes |
 | **Composição** | `Agente` contém uma instância de `Recomendador` (relação "tem-um") |
-| **Construtores (`__init__`)** | Cada classe inicializa seu estado no construtor (conexão API, leitura CSV, criação de pasta) |
+| **Construtores** | Cada classe inicializa seu estado no construtor (conexão API, leitura CSV, criação de pasta) |
 | **Tratamento de Exceções** | `try/except` em todas as operações críticas (API, leitura de arquivo, geração de PDF) |
 | **Responsabilidade Única** | Cada classe resolve exatamente um problema do domínio |
 
@@ -97,36 +97,36 @@ O arquivo CSV semi-estruturado contém o catálogo utilizado pelo motor de recom
 | `type` | `string` | Classificação do conteúdo | `Filme` ou `Série` |
 | `genres` | `string` | Gêneros separados por pipe (`\|`) | `Crime\|Drama\|Thriller` |
 
-O dataset contém **mais de 60 títulos** entre filmes e séries. Para expandir a base, basta adicionar novas linhas seguindo o mesmo formato CSV.
+O dataset contém 65 títulos, entre filmes e séries. Para expandir a base, basta adicionar novas linhas seguindo o mesmo formato CSV.
 
 ---
 
-## Como Executar o Projeto
+## Como executar o projeto
 
 **Pré-requisitos Iniciais:** 
 * Ter o [Docker](https://www.docker.com/) e Docker Compose instalados.
 * Ter o [Ollama](https://ollama.com/) instalado na sua máquina host.
 
 **Passo 1: Clonar o repositório**
-Baixe o código-fonte para a sua máquina e entre na pasta do projeto:
+Baixe o código-fonte e entre na pasta do projeto:
 ```bash
 git clone https://github.com/seu-usuario/cine-agent.git
 cd cine-agent
 ```
 
-**Passo 2: Baixar e Rodar o Modelo de IA**
+**Passo 2: Baixar e rodar o modelo de IA**
 O sistema utiliza o modelo `qwen2.5:1.5b` rodando localmente na sua máquina. Para garantir que ele está disponível, abra um terminal no seu computador e execute:
 ```bash
 ollama run qwen2.5:1.5b
 ```
-*Dica: Após o modelo baixar e aparecer no terminal, você pode digitar `/bye` para fechar, pois ele ficará disponível em background.*
+*Obs: Após o modelo baixar e aparecer no terminal, você pode digitar `/bye` para fechar, pois ele ficará disponível em background.*
 
-**Passo 3: Executar a Aplicação via Docker**
+**Passo 3: Executar via Docker**
 Com o Ollama pronto e o modelo baixado, inicie os containers da aplicação:
 ```bash
 docker compose up --build
 ```
 
-**Passo 4: Acessar o Sistema**
+**Passo 4: Acessar o sistema**
 Abra o seu navegador e acesse:
 **http://localhost:8501**
