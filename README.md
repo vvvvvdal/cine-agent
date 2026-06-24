@@ -73,18 +73,22 @@ Um sistema de recomendação via interface web conversacional, desenvolvido em P
 
 ```text
 cine-agent/
+├── exports/                    # Pasta contendo 3 exemplos de PDFs já gerados
 ├── src/
-│   ├── app.py                  # Ponto de entrada: Interface Streamlit e fluxo do chat
 │   ├── agente.py               # Classe Agente: Agente com IA Local (Ollama)
+│   ├── app.py                  # Ponto de entrada: Interface Streamlit e fluxo do chat
 │   ├── recomendador.py         # Classe Recomendador: Carregamento CSV e algoritmo de similaridade
 │   └── exportador.py           # Classe Exportador: Geração de relatórios PDF estruturados
 │
-├── exports/                    # Pasta contendo exemplos de PDFs já gerados
+|── .dockerignore               # Arquivos ignorados pelo Docker
+|── .gitignore                  # Arquivos ignorados pelo Git
 ├── conteudo.csv                # Dataset semi-estruturado (65 títulos de filmes e séries)
-├── requirements.txt            # Dependências Python do projeto
-├── Dockerfile                  # Imagem Docker (Python 3.10-slim)
+├── diagrama.uml                # Diagrama do sistema, classes e relações em UML
 ├── docker-compose.yml          # Orquestração de containers com variáveis de ambiente
-└── .gitignore                  # Arquivos ignorados pelo Git
+├── Dockerfile                  # Imagem Docker (Python 3.10-slim)
+├── README.md                   # Esse README explicativo
+├── requirements.txt            # Dependências Python do projeto
+└── slides.pdf                  # Slides de apresentação do projeto
 ```
 
 ---
