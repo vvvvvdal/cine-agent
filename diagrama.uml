@@ -1,0 +1,63 @@
+@startuml CineAgent_Slide
+skinparam classAttributeIconSize 0
+skinparam classFontSize 12
+skinparam ArrowColor #333333
+skinparam ClassBorderColor #333333
+skinparam ClassBackgroundColor #FFFFFF
+skinparam PackageBackgroundColor #EEF2F7
+skinparam PackageBorderColor #888888
+
+class "app.py" as App <<Script>> {
+  + iniciar_sistema() : tuple
+}
+
+class Recomendador {
+  - df : DataFrame
+  - mapa_generos : dict
+  --
+  + extrair_titulos(mensagem) : list
+  + extrair_pedidos(mensagem) : list
+  + buscar_similares_detalhado(titulo) : list
+  + buscar_diferentes_detalhado(titulo) : list
+  + buscar_por_genero(genero) : list
+  + buscar_info_fonte(titulo) : dict
+}
+
+class Agente {
+  - motor : Recomendador
+  - cliente : ollama.Client
+  + ultimo_relatorio : dict | None
+  --
+  + conversar(mensagem) : str
+  - _classificar_modo_com_ia(texto) : str
+}
+
+class Exportador {
+  --
+  + gerar_pdf_relatorio(relatorio) : bytes
+}
+
+package "Bibliotecas Externas" <<Frame>> {
+  class "ollama"     <<lib>>
+  class "fpdf2"      <<lib>>
+  class "pandas"     <<lib>>
+  class "streamlit"  <<lib>>
+}
+
+' ── App orquestra tudo (dependência / instanciação) ──
+App ..>  Agente       : <<instancia>>
+App ..>  Exportador   : <<instancia>>
+App ..>  Recomendador : <<instancia>>
+App ..>  "streamlit"  : <<usa>> (UI)
+
+' ── Composição: Agente possui Recomendador ──
+Agente "1" *-- "1" Recomendador : composição\n(motor)
+
+' ── Associação: Agente usa ollama para classificar intenção ──
+Agente ..> "ollama" : <<usa>>\nclassificar intenção (LLM)
+
+' ── Dependências de uso das libs ──
+Exportador   ..> "fpdf2"  : <<usa>>\ngerar PDF em memória
+Recomendador ..> "pandas" : <<usa>>\ncarregar e filtrar CSV
+
+@enduml
