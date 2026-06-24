@@ -7,3 +7,4 @@ ollama>=0.3.0
 
 # Exportar PDF
 fpdf2>=2.7.8
+thefuzz>=0.20.0

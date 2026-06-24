@@ -1,66 +1,15 @@
 from fpdf import FPDF
-from io import BytesIO
-import os
 import logging
 
 logger = logging.getLogger(__name__)
 
 class Exportador:
-    def __init__(self, pasta_saida: str = "exports"):
+    def __init__(self):
         """
-        Construtor. Garante que a pasta de exportação exista no sistema.
+        Construtor. O exportador opera 100% em memória, devolvendo bytes diretamente.
+        Não é necessário criar ou manter pastas de exportação.
         """
-        self.pasta_saida = pasta_saida
-        os.makedirs(self.pasta_saida, exist_ok=True)
-        logger.info(f"Exportador inicializado. Pasta de destino: {self.pasta_saida}")
-
-    def gerar_txt(self, conteudo: str, nome_arquivo: str = "recomendacoes.txt") -> str:
-        """
-        Salva o conteúdo em um arquivo .txt e retorna o caminho.
-        """
-        caminho_completo = os.path.join(self.pasta_saida, nome_arquivo)
-        try:
-            with open(caminho_completo, "w", encoding="utf-8") as f:
-                f.write(conteudo)
-            logger.info(f".txt gerado com sucesso em: {caminho_completo}")
-            return caminho_completo
-        except Exception as e:
-            logger.error(f"Erro ao gerar .txt: {e}")
-            return ""
-
-    def gerar_pdf(self, conteudo: str, nome_arquivo: str = "recomendacoes.pdf") -> str:
-        """
-        Gera um arquivo PDF com o conteúdo e retorna o caminho.
-        """
-        caminho_completo = os.path.join(self.pasta_saida, nome_arquivo)
-        try:
-            pdf = FPDF()
-            pdf.add_page()
-            pdf.set_font("Arial", size=12)
-            
-            pdf.multi_cell(0, 10, txt=conteudo) # "multi_cell" permite quebra de linha automática para textos longos (como sinopses)
-            
-            pdf.output(caminho_completo)
-            logger.info(f"PDF gerado com sucesso em: {caminho_completo}")
-            return caminho_completo
-        except Exception as e:
-            logger.error(f"Erro ao gerar PDF: {e}")
-            return ""
-
-    def gerar_pdf_bytes(self, conteudo: str) -> bytes:
-        """
-        Gera o PDF em memória e retorna os bytes brutos.
-        Usado pelo Streamlit para servir o download sem salvar no disco.
-        """
-        try:
-            pdf = FPDF()
-            pdf.add_page()
-            pdf.set_font("Arial", size=12)
-            pdf.multi_cell(0, 10, txt=conteudo)
-            return bytes(pdf.output())
-        except Exception as e:
-            logger.error(f"Erro ao gerar PDF em memória: {e}")
-            return b""
+        logger.info("Exportador inicializado. Modo de operação: em memória.")
 
     def gerar_pdf_relatorio(self, relatorio: dict) -> bytes:
         """
