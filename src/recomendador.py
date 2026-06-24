@@ -20,7 +20,6 @@ class Recomendador:
             self.df = pd.read_csv(caminho_csv) # Colunas 'title', 'type' e 'genres'
             self.df.dropna(subset=['title', 'genres'], inplace=True) # Remove linhas vazias
             
-            # Cria lista de gêneros únicos
             todos_generos_str = "|".join(self.df['genres'].dropna().tolist())
             self.generos_unicos = set(todos_generos_str.split('|'))
             
