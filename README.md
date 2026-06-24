@@ -102,6 +102,7 @@ O arquivo CSV semi-estruturado contém o catálogo utilizado pelo motor de recom
 | `title` | `string` | Nome do título | `Better Call Saul` |
 | `type` | `string` | Classificação do conteúdo | `Filme` ou `Série` |
 | `genres` | `string` | Gêneros separados por pipe (`\|`) | `Crime\|Drama\|Thriller` |
+| `year` | `string` | Data de lançamento do conteúdo | `2015` |
 
 O dataset contém 65 títulos, entre filmes e séries. Para expandir a base, basta adicionar novas linhas seguindo o mesmo formato CSV.
 
